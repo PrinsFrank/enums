@@ -7,14 +7,14 @@ use Error;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\KeyNotFoundException;
 
+/** @template T of \BackedEnum */
 class BackedEnum
 {
     /**
-     * @template T of \BackedEnum
      * @param class-string<T> $fqn
-     * @return T
      * @throws KeyNotFoundException
      * @throws InvalidArgumentException
+     * @return T
      */
     public static function fromKey(string $fqn, string $keyName): \BackedEnum
     {
@@ -22,10 +22,9 @@ class BackedEnum
     }
 
     /**
-     * @template T of \BackedEnum
      * @param class-string<T> $fqn
-     * @return T|null
      * @throws InvalidArgumentException
+     * @return T|null
      */
     public static function tryFromKey(string $fqn, string $keyName): ?\BackedEnum
     {
@@ -48,10 +47,9 @@ class BackedEnum
     }
 
     /**
-     * @template T of \BackedEnum
      * @param class-string<T> $fqn
-     * @return array<int, string>
      * @throws InvalidArgumentException
+     * @return array<int, string>
      */
     public static function names(string $fqn): array
     {
@@ -63,10 +61,9 @@ class BackedEnum
     }
 
     /**
-     * @template T of \BackedEnum
      * @param class-string<T> $fqn
-     * @return array<int, int|string>
      * @throws InvalidArgumentException
+     * @return array<int, int|string>
      */
     public static function values(string $fqn): array
     {
@@ -78,10 +75,9 @@ class BackedEnum
     }
 
     /**
-     * @template T of \BackedEnum
      * @param class-string<T> $fqn
-     * @return array<int|string, int|string>
      * @throws InvalidArgumentException
+     * @return array<int|string, int|string>
      */
     public static function toArray(string $fqn): array
     {
