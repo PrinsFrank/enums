@@ -5,5 +5,4 @@ namespace PrinsFrank\Enums\Exception;
 
 class KeyNotFoundException extends EnumException
 {
-
 }

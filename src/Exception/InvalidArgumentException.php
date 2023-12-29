@@ -5,5 +5,4 @@ namespace PrinsFrank\Enums\Exception;
 
 class InvalidArgumentException extends EnumException
 {
-
 }

@@ -1,0 +1,22 @@
+parameters:
+    tmpDir: .phpstan.result.cache
+    level: 9
+    paths:
+        - src
+        - tests
+        - dev
+    phpVersion: 80300
+    checkUninitializedProperties: true
+    checkImplicitMixed: true
+    checkBenevolentUnionTypes: true
+    exceptions:
+        check:
+            missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
+        implicitThrows: false
+        uncheckedExceptionClasses:
+            - 'PHPUnit\Framework\ExpectationFailedException'
+            - 'SebastianBergmann\RecursionContext\InvalidArgumentException'
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
