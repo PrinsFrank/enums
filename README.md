@@ -24,3 +24,61 @@ To start right away, run the following command in your composer project;
 Or for development only;
 
 ```composer require prinsfrank/enums --dev```
+
+## How this package works
+
+### UnitEnum
+
+Let's assume we have the following UnitEnum:
+```php
+enum Example {
+    case Foo;
+    case Bar;
+}
+```
+
+If we want to get a value by it's name from a string, we can call `fromName` or `tryFromName`;
+```php
+\PrinsFrank\Enums\UnitEnum::fromName(Example::class, 'Foo'); // Example::Foo
+\PrinsFrank\Enums\UnitEnum::tryFromName(Example::class, 'Foo'); // Example::Foo
+```
+
+The difference between the two methods is the way non-existing names are handled;
+```php
+
+\PrinsFrank\Enums\UnitEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
+\PrinsFrank\Enums\UnitEnum::tryFromName(Example::class, 'Example'); // null
+```
+
+The last method that this package provides is to get an array of all the names for an enum;
+```php
+\PrinsFrank\Enums\UnitEnum::names(Example::class); // ['Foo', 'Bar']
+```
+
+### BackedEnum
+
+Let's assume we have the following BackedEnum: (It doesn't matter if an enum is backed by a string or an integer)
+```php
+enum Example: string {
+    case Foo = 'Foo';
+    case Bar = 'Bar';
+}
+```
+
+If we want to get a value by it's name from a string, we can call `fromName` or `tryFromName`;
+```php
+\PrinsFrank\Enums\BackedEnum::fromName(Example::class, 'Foo'); // Example::Foo
+\PrinsFrank\Enums\BackedEnum::tryFromName(Example::class, 'Foo'); // Example::Foo
+```
+
+The difference between the two methods is the way non-existing names are handled;
+```php
+
+\PrinsFrank\Enums\BackedEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
+\PrinsFrank\Enums\BackedEnum::tryFromName(Example::class, 'Example'); // null
+```
+
+The last method that this package provides is to get an array of all the names for an enum;
+```php
+\PrinsFrank\Enums\BackedEnum::names(Example::class); // ['Foo', 'Bar']
+```
