@@ -30,7 +30,7 @@ class UnitEnumTest extends TestCase
         $testClass = new class () {};
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('It is only possible to get names of unitEnums, "' . $testClass::class . '" provided');
+        $this->expectExceptionMessage(sprintf('It is only possible to get names of unitEnums, "%s" provided', $testClass::class));
 
         /** @phpstan-ignore-next-line as not everyone has PHPStan to tell them not to pass something else than an Enum FQN */
         UnitEnum::tryFromName($testClass::class, 'foo');
@@ -66,7 +66,7 @@ class UnitEnumTest extends TestCase
         $testClass = new class () {};
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('It is only possible to get names of unitEnums, "' . $testClass::class . '" provided');
+        $this->expectExceptionMessage(sprintf('It is only possible to get names of unitEnums, "%s" provided', $testClass::class));
 
         /** @phpstan-ignore-next-line as not everyone has PHPStan to tell them not to pass something else than an Enum FQN */
         UnitEnum::names($testClass::class);

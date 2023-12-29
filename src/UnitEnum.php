@@ -18,7 +18,7 @@ final class UnitEnum
      */
     public static function fromName(string $fqn, string $name): \UnitEnum
     {
-        return self::tryFromName($fqn, $name) ?? throw new NameNotFoundException('Name "' . $name . '" not found in "' . $fqn . '"');
+        return self::tryFromName($fqn, $name) ?? throw new NameNotFoundException(sprintf('Name "%s" not found in "%s"', $name, $fqn));
     }
 
     /**
@@ -28,17 +28,17 @@ final class UnitEnum
      */
     public static function tryFromName(string $fqn, string $keyName): ?\UnitEnum
     {
-        if (is_a($fqn, \UnitEnum::class, true) === false) {
-            throw new InvalidArgumentException('It is only possible to get names of unitEnums, "' . $fqn . '" provided');
+        if (!is_a($fqn, \UnitEnum::class, true)) {
+            throw new InvalidArgumentException(sprintf('It is only possible to get names of unitEnums, "%s" provided', $fqn));
         }
 
-        if (!defined("$fqn::$keyName")) {
+        if (!defined("{$fqn}::{$keyName}")) {
             return null;
         }
 
         try {
             /** @var T $itemValue */
-            $itemValue = constant("$fqn::$keyName");
+            $itemValue = constant("{$fqn}::{$keyName}");
         } catch (Error) {
             // @codeCoverageIgnoreStart
             return null;
@@ -55,8 +55,8 @@ final class UnitEnum
      */
     public static function names(string $fqn): array
     {
-        if (is_a($fqn, \UnitEnum::class, true) === false) {
-            throw new InvalidArgumentException('It is only possible to get names of unitEnums, "' . $fqn . '" provided');
+        if (!is_a($fqn, \UnitEnum::class, true)) {
+            throw new InvalidArgumentException(sprintf('It is only possible to get names of unitEnums, "%s" provided', $fqn));
         }
 
         return array_column($fqn::cases(), 'name');
