@@ -13,7 +13,10 @@ use PrinsFrank\Enums\UnitEnum;
  */
 class UnitEnumTest extends TestCase
 {
-    /** @covers ::tryFromKey */
+    /**
+     * @covers ::tryFromKey
+     * @throws InvalidArgumentException
+     */
     public function testTryFromKey(): void
     {
         static::assertNull(UnitEnum::tryFromKey(TestEnum::class, 'BAR'));
@@ -32,13 +35,20 @@ class UnitEnumTest extends TestCase
         UnitEnum::tryFromKey($testClass::class, 'foo');
     }
 
-    /** @covers ::fromKey */
+    /**
+     * @covers ::fromKey
+     * @throws InvalidArgumentException
+     * @throws KeyNotFoundException
+     */
     public function testFromKey(): void
     {
         static::assertSame(TestEnum::FOO, UnitEnum::fromKey(TestEnum::class, 'FOO'));
     }
 
-    /** @covers ::names */
+    /**
+     * @covers ::names
+     * @throws InvalidArgumentException
+     */
     public function testNames(): void
     {
         static::assertSame(
@@ -59,7 +69,11 @@ class UnitEnumTest extends TestCase
         UnitEnum::names($testClass::class);
     }
 
-    /** @covers ::fromKey */
+    /**
+     * @covers ::fromKey
+     * @throws InvalidArgumentException
+     * @throws KeyNotFoundException
+     */
     public function testFromKeyThrowsExceptionNonExistingKey(): void
     {
         $this->expectException(KeyNotFoundException::class);
