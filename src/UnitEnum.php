@@ -8,7 +8,7 @@ use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\KeyNotFoundException;
 
 /** @template T of \UnitEnum */
-class UnitEnum
+final class UnitEnum
 {
     /**
      * @param class-string<T> $fqn
@@ -40,7 +40,9 @@ class UnitEnum
             /** @var T $itemValue */
             $itemValue = constant("$fqn::$keyName");
         } catch (Error) {
+            // @codeCoverageIgnoreStart
             return null;
+            // @codeCoverageIgnoreEnd
         }
 
         return $itemValue;
