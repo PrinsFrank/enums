@@ -5,20 +5,20 @@ namespace PrinsFrank\Enums;
 
 use Error;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
-use PrinsFrank\Enums\Exception\KeyNotFoundException;
+use PrinsFrank\Enums\Exception\NameNotFoundException;
 
 /** @template T of \BackedEnum */
 final class BackedEnum
 {
     /**
      * @param class-string<T> $fqn
-     * @throws KeyNotFoundException
+     * @throws NameNotFoundException
      * @throws InvalidArgumentException
      * @return T
      */
-    public static function fromKey(string $fqn, string $keyName): \BackedEnum
+    public static function fromName(string $fqn, string $keyName): \BackedEnum
     {
-        return self::tryFromKey($fqn, $keyName) ?? throw new KeyNotFoundException('Key "' . $keyName . '" not found in "' . $fqn . '"');
+        return self::tryFromName($fqn, $keyName) ?? throw new NameNotFoundException('Name "' . $keyName . '" not found in "' . $fqn . '"');
     }
 
     /**
@@ -26,7 +26,7 @@ final class BackedEnum
      * @throws InvalidArgumentException
      * @return T|null
      */
-    public static function tryFromKey(string $fqn, string $keyName): ?\BackedEnum
+    public static function tryFromName(string $fqn, string $keyName): ?\BackedEnum
     {
         if (is_a($fqn, \BackedEnum::class, true) === false) {
             throw new InvalidArgumentException('It is only possible to get names of backedEnums, "' . $fqn . '" provided');

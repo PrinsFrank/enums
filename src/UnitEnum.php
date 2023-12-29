@@ -5,20 +5,20 @@ namespace PrinsFrank\Enums;
 
 use Error;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
-use PrinsFrank\Enums\Exception\KeyNotFoundException;
+use PrinsFrank\Enums\Exception\NameNotFoundException;
 
 /** @template T of \UnitEnum */
 final class UnitEnum
 {
     /**
      * @param class-string<T> $fqn
-     * @throws KeyNotFoundException
+     * @throws NameNotFoundException
      * @throws InvalidArgumentException
      * @return T
      */
-    public static function fromKey(string $fqn, string $keyName): \UnitEnum
+    public static function fromName(string $fqn, string $name): \UnitEnum
     {
-        return self::tryFromKey($fqn, $keyName) ?? throw new KeyNotFoundException('Key "' . $keyName . '" not found in "' . $fqn . '"');
+        return self::tryFromName($fqn, $name) ?? throw new NameNotFoundException('Name "' . $name . '" not found in "' . $fqn . '"');
     }
 
     /**
@@ -26,7 +26,7 @@ final class UnitEnum
      * @throws InvalidArgumentException
      * @return T|null
      */
-    public static function tryFromKey(string $fqn, string $keyName): ?\UnitEnum
+    public static function tryFromName(string $fqn, string $keyName): ?\UnitEnum
     {
         if (is_a($fqn, \UnitEnum::class, true) === false) {
             throw new InvalidArgumentException('It is only possible to get names of unitEnums, "' . $fqn . '" provided');

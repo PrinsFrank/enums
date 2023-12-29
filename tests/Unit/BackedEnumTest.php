@@ -6,7 +6,7 @@ namespace PrinsFrank\Enums\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\Enums\BackedEnum;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
-use PrinsFrank\Enums\Exception\KeyNotFoundException;
+use PrinsFrank\Enums\Exception\NameNotFoundException;
 
 /**
  * @coversDefaultClass \PrinsFrank\Enums\BackedEnum
@@ -14,20 +14,20 @@ use PrinsFrank\Enums\Exception\KeyNotFoundException;
 class BackedEnumTest extends TestCase
 {
     /**
-     * @covers ::tryFromKey
+     * @covers ::tryFromName
      *
      * @throws InvalidArgumentException
      */
     public function testTryFromKey(): void
     {
-        static::assertNull(BackedEnum::tryFromKey(TestEnumBackedByString::class, 'BAR'));
-        static::assertSame(TestEnumBackedByString::FOO, BackedEnum::tryFromKey(TestEnumBackedByString::class, 'FOO'));
+        static::assertNull(BackedEnum::tryFromName(TestEnumBackedByString::class, 'BAR'));
+        static::assertSame(TestEnumBackedByString::FOO, BackedEnum::tryFromName(TestEnumBackedByString::class, 'FOO'));
 
-        static::assertNull(BackedEnum::tryFromKey(TestEnumBackedByInt::class, 'BAR'));
-        static::assertSame(TestEnumBackedByInt::FOO, BackedEnum::tryFromKey(TestEnumBackedByInt::class, 'FOO'));
+        static::assertNull(BackedEnum::tryFromName(TestEnumBackedByInt::class, 'BAR'));
+        static::assertSame(TestEnumBackedByInt::FOO, BackedEnum::tryFromName(TestEnumBackedByInt::class, 'FOO'));
     }
 
-    /** @covers ::tryFromKey */
+    /** @covers ::tryFromName */
     public function testTryFromKeyThrowsExceptionOnNonEnumValue(): void
     {
         $testClass = new class () {};
@@ -36,19 +36,19 @@ class BackedEnumTest extends TestCase
         $this->expectExceptionMessage('It is only possible to get names of backedEnums, "' . $testClass::class . '" provided');
 
         /** @phpstan-ignore-next-line as not everyone has PHPStan to tell them not to pass something else than an Enum FQN */
-        BackedEnum::tryFromKey($testClass::class, 'foo');
+        BackedEnum::tryFromName($testClass::class, 'foo');
     }
 
     /**
-     * @covers ::fromKey
+     * @covers ::fromName
      *
      * @throws InvalidArgumentException
-     * @throws KeyNotFoundException
+     * @throws NameNotFoundException
      */
     public function testFromKey(): void
     {
-        static::assertSame(TestEnumBackedByString::FOO, BackedEnum::fromKey(TestEnumBackedByString::class, 'FOO'));
-        static::assertSame(TestEnumBackedByInt::FOO, BackedEnum::fromKey(TestEnumBackedByInt::class, 'FOO'));
+        static::assertSame(TestEnumBackedByString::FOO, BackedEnum::fromName(TestEnumBackedByString::class, 'FOO'));
+        static::assertSame(TestEnumBackedByInt::FOO, BackedEnum::fromName(TestEnumBackedByInt::class, 'FOO'));
     }
 
     /**
@@ -139,15 +139,15 @@ class BackedEnumTest extends TestCase
     }
 
     /**
-     * @covers ::fromKey
+     * @covers ::fromName
      *
      * @throws InvalidArgumentException
-     * @throws KeyNotFoundException
+     * @throws NameNotFoundException
      */
     public function testFromKeyThrowsExceptionNonExistingKey(): void
     {
-        $this->expectException(KeyNotFoundException::class);
-        BackedEnum::fromKey(TestEnumBackedByString::class, 'BAR');
+        $this->expectException(NameNotFoundException::class);
+        BackedEnum::fromName(TestEnumBackedByString::class, 'BAR');
     }
 }
 

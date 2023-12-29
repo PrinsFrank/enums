@@ -5,7 +5,7 @@ namespace PrinsFrank\Enums\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
-use PrinsFrank\Enums\Exception\KeyNotFoundException;
+use PrinsFrank\Enums\Exception\NameNotFoundException;
 use PrinsFrank\Enums\UnitEnum;
 
 /**
@@ -14,17 +14,17 @@ use PrinsFrank\Enums\UnitEnum;
 class UnitEnumTest extends TestCase
 {
     /**
-     * @covers ::tryFromKey
+     * @covers ::tryFromName
      *
      * @throws InvalidArgumentException
      */
     public function testTryFromKey(): void
     {
-        static::assertNull(UnitEnum::tryFromKey(TestEnum::class, 'BAR'));
-        static::assertSame(TestEnum::FOO, UnitEnum::tryFromKey(TestEnum::class, 'FOO'));
+        static::assertNull(UnitEnum::tryFromName(TestEnum::class, 'BAR'));
+        static::assertSame(TestEnum::FOO, UnitEnum::tryFromName(TestEnum::class, 'FOO'));
     }
 
-    /** @covers ::tryFromKey */
+    /** @covers ::tryFromName */
     public function testTryFromKeyThrowsExceptionOnNonEnumValue(): void
     {
         $testClass = new class () {};
@@ -33,18 +33,18 @@ class UnitEnumTest extends TestCase
         $this->expectExceptionMessage('It is only possible to get names of unitEnums, "' . $testClass::class . '" provided');
 
         /** @phpstan-ignore-next-line as not everyone has PHPStan to tell them not to pass something else than an Enum FQN */
-        UnitEnum::tryFromKey($testClass::class, 'foo');
+        UnitEnum::tryFromName($testClass::class, 'foo');
     }
 
     /**
-     * @covers ::fromKey
+     * @covers ::fromName
      *
      * @throws InvalidArgumentException
-     * @throws KeyNotFoundException
+     * @throws NameNotFoundException
      */
     public function testFromKey(): void
     {
-        static::assertSame(TestEnum::FOO, UnitEnum::fromKey(TestEnum::class, 'FOO'));
+        static::assertSame(TestEnum::FOO, UnitEnum::fromName(TestEnum::class, 'FOO'));
     }
 
     /**
@@ -73,15 +73,15 @@ class UnitEnumTest extends TestCase
     }
 
     /**
-     * @covers ::fromKey
+     * @covers ::fromName
      *
      * @throws InvalidArgumentException
-     * @throws KeyNotFoundException
+     * @throws NameNotFoundException
      */
     public function testFromKeyThrowsExceptionNonExistingKey(): void
     {
-        $this->expectException(KeyNotFoundException::class);
-        UnitEnum::fromKey(TestEnum::class, 'BAR');
+        $this->expectException(NameNotFoundException::class);
+        UnitEnum::fromName(TestEnum::class, 'BAR');
     }
 }
 
