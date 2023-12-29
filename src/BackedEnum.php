@@ -89,6 +89,9 @@ final class BackedEnum
 
         $cases = $fqn::cases();
 
-        return array_combine(array_keys($cases), $cases);
+        return array_combine(
+            array_column($cases, 'name'),
+            array_column($cases, 'value')
+        );
     }
 }
