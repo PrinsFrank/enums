@@ -4,7 +4,6 @@ parameters:
     paths:
         - src
         - tests
-        - dev
     phpVersion: 80300
     checkUninitializedProperties: true
     checkImplicitMixed: true
