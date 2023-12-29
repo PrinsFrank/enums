@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace PrinsFrank\Enums\Tests;
+namespace PrinsFrank\Enums\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
