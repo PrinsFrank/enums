@@ -87,11 +87,11 @@ final class BackedEnum
             throw new InvalidArgumentException('It is only possible to get an array of key/value pairs for backedEnums, "' . $fqn . '" provided');
         }
 
-        $array = [];
-        foreach ($fqn::cases() as $case) {
-            $array[$case->name] = $case->value;
-        }
+        $cases = $fqn::cases();
 
-        return $array;
+        return array_combine(
+            array_column($cases, 'name'),
+            array_column($cases, 'value')
+        );
     }
 }
