@@ -28,7 +28,7 @@ final class BackedEnum
      */
     public static function tryFromName(string $fqn, string $keyName): ?\BackedEnum
     {
-        if (!is_a($fqn, \BackedEnum::class, true)) {
+        if (is_a($fqn, \BackedEnum::class, true) === false) {
             throw new InvalidArgumentException(sprintf('It is only possible to get names of backedEnums, "%s" provided', $fqn));
         }
 
@@ -55,7 +55,7 @@ final class BackedEnum
      */
     public static function names(string $fqn): array
     {
-        if (!is_a($fqn, \BackedEnum::class, true)) {
+        if (is_a($fqn, \BackedEnum::class, true) === false) {
             throw new InvalidArgumentException(sprintf('It is only possible to get names of backedEnums, "%s" provided', $fqn));
         }
 
@@ -69,7 +69,7 @@ final class BackedEnum
      */
     public static function values(string $fqn): array
     {
-        if (!is_a($fqn, \BackedEnum::class, true)) {
+        if (is_a($fqn, \BackedEnum::class, true) === false) {
             throw new InvalidArgumentException(sprintf('It is only possible to get values of backedEnums, "%s" provided', $fqn));
         }
 
@@ -83,7 +83,7 @@ final class BackedEnum
      */
     public static function toArray(string $fqn): array
     {
-        if (!is_a($fqn, \BackedEnum::class, true)) {
+        if (is_a($fqn, \BackedEnum::class, true) === false) {
             throw new InvalidArgumentException(sprintf('It is only possible to get an array of key/value pairs for backedEnums, "%s" provided', $fqn));
         }
 

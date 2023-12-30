@@ -28,11 +28,11 @@ final class UnitEnum
      */
     public static function tryFromName(string $fqn, string $keyName): ?\UnitEnum
     {
-        if (!is_a($fqn, \UnitEnum::class, true)) {
+        if (is_a($fqn, \UnitEnum::class, true) === false) {
             throw new InvalidArgumentException(sprintf('It is only possible to get names of unitEnums, "%s" provided', $fqn));
         }
 
-        if (!defined("{$fqn}::{$keyName}")) {
+        if (defined("{$fqn}::{$keyName}") === false) {
             return null;
         }
 
@@ -55,7 +55,7 @@ final class UnitEnum
      */
     public static function names(string $fqn): array
     {
-        if (!is_a($fqn, \UnitEnum::class, true)) {
+        if (is_a($fqn, \UnitEnum::class, true) === false) {
             throw new InvalidArgumentException(sprintf('It is only possible to get names of unitEnums, "%s" provided', $fqn));
         }
 
