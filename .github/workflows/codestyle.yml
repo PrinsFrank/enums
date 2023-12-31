@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: composer install
+        run: composer update
       - name: Run PHP CS Fixer
         run: composer run cs
       - name: Check EditorConfig configuration
