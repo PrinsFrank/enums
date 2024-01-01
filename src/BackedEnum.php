@@ -7,10 +7,10 @@ use Error;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\NameNotFoundException;
 
-/** @template T of \BackedEnum */
 final class BackedEnum
 {
     /**
+     * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws NameNotFoundException
      * @throws InvalidArgumentException
@@ -22,6 +22,7 @@ final class BackedEnum
     }
 
     /**
+     * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
      * @return T|null
@@ -49,6 +50,7 @@ final class BackedEnum
     }
 
     /**
+     * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
      * @return array<int, string>
@@ -63,6 +65,7 @@ final class BackedEnum
     }
 
     /**
+     * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
      * @return array<int, int|string>
@@ -77,6 +80,7 @@ final class BackedEnum
     }
 
     /**
+     * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
      * @return array<int|string, int|string>
