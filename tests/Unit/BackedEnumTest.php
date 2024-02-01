@@ -156,25 +156,25 @@ class BackedEnumTest extends TestCase
     {
         self::assertEquals(
             [],
-            BackedEnum::getCaseAttributes(TestEnumBackedByInt::FOO)
+            BackedEnum::getCaseAttributes(TestEnumBackedByString::FOO)
         );
         self::assertEquals(
             [],
-            BackedEnum::getCaseAttributes(TestEnumBackedByInt::FOO)
+            BackedEnum::getCaseAttributes(TestEnumBackedByString::FOO)
         );
         self::assertEquals(
             [
                 new TestBackedEnumAttributeWithoutConstructorArguments(),
                 new TestBackedEnumAttributeWithConstructorArguments('bar')
             ],
-            BackedEnum::getCaseAttributes(TestEnumBackedByInt::FIZ)
+            BackedEnum::getCaseAttributes(TestEnumBackedByString::FIZ)
         );
         self::assertEquals(
             [
                 new TestBackedEnumAttributeWithoutConstructorArguments(),
                 new TestBackedEnumAttributeWithConstructorArguments('bar')
             ],
-            BackedEnum::getCaseAttributes(TestEnumBackedByInt::FIZ)
+            BackedEnum::getCaseAttributes(TestEnumBackedByString::FIZ)
         );
     }
 }
