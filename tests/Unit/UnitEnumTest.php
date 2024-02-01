@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace PrinsFrank\Enums\Tests\Unit;
 
+use Attribute;
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\NameNotFoundException;
@@ -83,10 +84,53 @@ class UnitEnumTest extends TestCase
         $this->expectException(NameNotFoundException::class);
         UnitEnum::fromName(TestEnum::class, 'BAR');
     }
+
+    /** @covers ::getCaseAttributes */
+    public function testGetCaseAttributes(): void
+    {
+        self::assertEquals(
+            [],
+            UnitEnum::getCaseAttributes(TestEnum::FOO)
+        );
+        self::assertEquals(
+            [],
+            UnitEnum::getCaseAttributes(TestEnum::FOO)
+        );
+        self::assertEquals(
+            [
+                new TestUnitEnumAttributeWithoutConstructorArguments(),
+                new TestUnitEnumAttributeWithConstructorArguments('bar')
+            ],
+            UnitEnum::getCaseAttributes(TestEnum::FIZ)
+        );
+        self::assertEquals(
+            [
+                new TestUnitEnumAttributeWithoutConstructorArguments(),
+                new TestUnitEnumAttributeWithConstructorArguments('bar')
+            ],
+            UnitEnum::getCaseAttributes(TestEnum::FIZ)
+        );
+    }
+}
+
+#[Attribute]
+class TestUnitEnumAttributeWithoutConstructorArguments
+{
+}
+
+#[Attribute]
+class TestUnitEnumAttributeWithConstructorArguments
+{
+    public function __construct(public readonly string $foo)
+    {
+    }
 }
 
 enum TestEnum
 {
     case FOO;
+
+    #[TestUnitEnumAttributeWithoutConstructorArguments]
+    #[TestUnitEnumAttributeWithConstructorArguments('bar')]
     case FIZ;
 }

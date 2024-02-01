@@ -6,6 +6,8 @@ namespace PrinsFrank\Enums;
 use Error;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\NameNotFoundException;
+use ReflectionAttribute;
+use ReflectionEnumBackedCase;
 
 final class BackedEnum
 {
@@ -96,6 +98,30 @@ final class BackedEnum
         return array_combine(
             array_column($cases, 'name'),
             array_column($cases, 'value')
+        );
+    }
+
+    /**
+     * @template T of object
+     * @param class-string<T>|null $attributeFQN
+     */
+    public static function hasCaseAttribute(\BackedEnum $backedEnum, string|null $attributeFQN = null): bool
+    {
+        return self::getCaseAttributes($backedEnum, $attributeFQN) !== [];
+    }
+
+    /**
+     * @template T of object
+     * @param class-string<T>|null $attributeFQN
+     * @return ($attributeFQN is string ? array<T> : array<object>)
+     */
+    public static function getCaseAttributes(\BackedEnum $backedEnum, string|null $attributeFQN = null): array
+    {
+        return array_map(
+            static function (ReflectionAttribute $reflectionAttribute): object {
+                return $reflectionAttribute->newInstance();
+            },
+            (new ReflectionEnumBackedCase($backedEnum, $backedEnum->name))->getAttributes($attributeFQN)
         );
     }
 }
