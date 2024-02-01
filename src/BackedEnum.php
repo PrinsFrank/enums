@@ -8,7 +8,6 @@ use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\NameNotFoundException;
 use ReflectionAttribute;
 use ReflectionEnumBackedCase;
-use stdClass;
 
 final class BackedEnum
 {

@@ -187,7 +187,9 @@ class TestAttributeWithoutConstructorArguments
 #[Attribute]
 class TestAttributeWithConstructorArguments
 {
-    public function __construct(public readonly string $foo) { }
+    public function __construct(public readonly string $foo)
+    {
+    }
 }
 
 enum TestEnumBackedByString: string
