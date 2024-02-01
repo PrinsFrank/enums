@@ -39,20 +39,20 @@ enum Example {
 
 If we want to get a value by it's name from a string, we can call `fromName` or `tryFromName`;
 ```php
-\PrinsFrank\Enums\UnitEnum::fromName(Example::class, 'Foo'); // Example::Foo
-\PrinsFrank\Enums\UnitEnum::tryFromName(Example::class, 'Foo'); // Example::Foo
+UnitEnum::fromName(Example::class, 'Foo'); // Example::Foo
+UnitEnum::tryFromName(Example::class, 'Foo'); // Example::Foo
 ```
 
 The difference between the two methods is the way non-existing names are handled;
 ```php
 
-\PrinsFrank\Enums\UnitEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
-\PrinsFrank\Enums\UnitEnum::tryFromName(Example::class, 'Example'); // null
+UnitEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
+UnitEnum::tryFromName(Example::class, 'Example'); // null
 ```
 
 The last method that this package provides is to get an array of all the names for an enum;
 ```php
-\PrinsFrank\Enums\UnitEnum::names(Example::class); // ['Foo', 'Bar']
+UnitEnum::names(Example::class); // ['Foo', 'Bar']
 ```
 
 ### BackedEnum
@@ -67,18 +67,18 @@ enum Example: string {
 
 If we want to get a value by it's name from a string, we can call `fromName` or `tryFromName`;
 ```php
-\PrinsFrank\Enums\BackedEnum::fromName(Example::class, 'Foo'); // Example::Foo
-\PrinsFrank\Enums\BackedEnum::tryFromName(Example::class, 'Foo'); // Example::Foo
+BackedEnum::fromName(Example::class, 'Foo'); // Example::Foo
+BackedEnum::tryFromName(Example::class, 'Foo'); // Example::Foo
 ```
 
 The difference between the two methods is the way non-existing names are handled;
 ```php
 
-\PrinsFrank\Enums\BackedEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
-\PrinsFrank\Enums\BackedEnum::tryFromName(Example::class, 'Example'); // null
+BackedEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
+BackedEnum::tryFromName(Example::class, 'Example'); // null
 ```
 
 The last method that this package provides is to get an array of all the names for an enum;
 ```php
-\PrinsFrank\Enums\BackedEnum::names(Example::class); // ['Foo', 'Bar']
+BackedEnum::names(Example::class); // ['Foo', 'Bar']
 ```
