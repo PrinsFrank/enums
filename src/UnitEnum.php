@@ -6,6 +6,8 @@ namespace PrinsFrank\Enums;
 use Error;
 use PrinsFrank\Enums\Exception\InvalidArgumentException;
 use PrinsFrank\Enums\Exception\NameNotFoundException;
+use ReflectionAttribute;
+use ReflectionEnumUnitCase;
 
 final class UnitEnum
 {
@@ -62,5 +64,29 @@ final class UnitEnum
         }
 
         return array_column($fqn::cases(), 'name');
+    }
+
+    /**
+     * @template T of object
+     * @param class-string<T>|null $attributeFQN
+     */
+    public static function hasCaseAttribute(\UnitEnum $unitEnum, string|null $attributeFQN = null): bool
+    {
+        return self::getCaseAttributes($unitEnum, $attributeFQN) !== [];
+    }
+
+    /**
+     * @template T of object
+     * @param class-string<T>|null $attributeFQN
+     * @return ($attributeFQN is string ? array<T> : array<object>)
+     */
+    public static function getCaseAttributes(\UnitEnum $unitEnum, string|null $attributeFQN = null): array
+    {
+        return array_map(
+            static function (ReflectionAttribute $reflectionAttribute): object {
+                return $reflectionAttribute->newInstance();
+            },
+            (new ReflectionEnumUnitCase($unitEnum, $unitEnum->name))->getAttributes($attributeFQN)
+        );
     }
 }
