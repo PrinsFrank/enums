@@ -164,15 +164,15 @@ class BackedEnumTest extends TestCase
         );
         self::assertEquals(
             [
-                new TestAttributeWithoutConstructorArguments(),
-                new TestAttributeWithConstructorArguments('bar')
+                new TestBackedEnumAttributeWithoutConstructorArguments(),
+                new TestBackedEnumAttributeWithConstructorArguments('bar')
             ],
             BackedEnum::getCaseAttributes(TestEnumBackedByInt::FIZ)
         );
         self::assertEquals(
             [
-                new TestAttributeWithoutConstructorArguments(),
-                new TestAttributeWithConstructorArguments('bar')
+                new TestBackedEnumAttributeWithoutConstructorArguments(),
+                new TestBackedEnumAttributeWithConstructorArguments('bar')
             ],
             BackedEnum::getCaseAttributes(TestEnumBackedByInt::FIZ)
         );
@@ -180,12 +180,12 @@ class BackedEnumTest extends TestCase
 }
 
 #[Attribute]
-class TestAttributeWithoutConstructorArguments
+class TestBackedEnumAttributeWithoutConstructorArguments
 {
 }
 
 #[Attribute]
-class TestAttributeWithConstructorArguments
+class TestBackedEnumAttributeWithConstructorArguments
 {
     public function __construct(public readonly string $foo)
     {
@@ -196,8 +196,8 @@ enum TestEnumBackedByString: string
 {
     case FOO = 'foo';
 
-    #[TestAttributeWithoutConstructorArguments]
-    #[TestAttributeWithConstructorArguments('bar')]
+    #[TestBackedEnumAttributeWithoutConstructorArguments]
+    #[TestBackedEnumAttributeWithConstructorArguments('bar')]
     case FIZ = 'fiz';
 }
 
