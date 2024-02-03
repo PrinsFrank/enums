@@ -33,6 +33,8 @@ Let's assume we have the following UnitEnum:
 ```php
 enum Example {
     case Foo;
+
+    #[HasSpecialMeaning]
     case Bar;
 }
 ```
@@ -50,9 +52,15 @@ UnitEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundException
 UnitEnum::tryFromName(Example::class, 'Example'); // null
 ```
 
-The last method that this package provides is to get an array of all the names for an enum;
+Another method that this package provides is to get an array of all the names for an enum;
 ```php
 UnitEnum::names(Example::class); // ['Foo', 'Bar']
+```
+
+And finally some methods to easily get the attributes of an enum case:
+```php
+UnitEnum::hasCaseAttributes(Example::Bar, HasSpecialMeaning); // true
+UnitEnum::getCaseAttributes(Example::Bar); // [new HasSpecialMeaning()]
 ```
 
 ### BackedEnum
@@ -61,6 +69,8 @@ Let's assume we have the following BackedEnum: (It doesn't matter if an enum is 
 ```php
 enum Example: string {
     case Foo = 'Foo';
+
+    #[HasSpecialMeaning]
     case Bar = 'Bar';
 }
 ```
@@ -78,7 +88,13 @@ BackedEnum::fromName(Example::class, 'Example'); // @throws NameNotFoundExceptio
 BackedEnum::tryFromName(Example::class, 'Example'); // null
 ```
 
-The last method that this package provides is to get an array of all the names for an enum;
+Another method that this package provides is to get an array of all the names for an enum;
 ```php
 BackedEnum::names(Example::class); // ['Foo', 'Bar']
+```
+
+And finally some methods to easily get the attributes of an enum case:
+```php
+BackedEnum::hasCaseAttributes(Example::Bar, HasSpecialMeaning); // true
+BackedEnum::getCaseAttributes(Example::Bar); // [new HasSpecialMeaning()]
 ```
