@@ -20,4 +20,8 @@ return (new PhpCsFixer\Config())->setRules(
         'phpdoc_separation'            => ['groups' => [['deprecated', 'internal'], ['standard', 'source'], ['covers', 'coversDefaultClass'], ['template', 'implements', 'extends', 'param', 'throws', 'return']]],
         'phpdoc_trim'                  => true,
     ]
-)->setFinder(PhpCsFixer\Finder::create()->exclude('vendor')->in(__DIR__));
+)->setFinder(
+    PhpCsFixer\Finder::create()
+        ->in(__DIR__)
+        ->exclude('vendor')
+)->setCacheFile('./cache/.php-cs-fixer.cache');
