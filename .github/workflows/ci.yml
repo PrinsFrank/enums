@@ -12,7 +12,8 @@ on:
 
 jobs:
   quality:
-    uses: prinsfrank/CI-PHP/.github/workflows/quality.yml@e35bf8e686fbbbd05ecc8c056ff3487b1b95f865
+    uses: prinsfrank/CI-PHP/.github/workflows/quality.yml@main
     with:
       PHP_VERSION: '8.3'
+      PHP_VERSIONS: '["8.2", "8.3", "8.4"]'
     secrets: inherit
