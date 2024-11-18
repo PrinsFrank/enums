@@ -55,7 +55,7 @@ final class UnitEnum
      * @template T of \UnitEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
-     * @return array<int, string>
+     * @return list<string>
      */
     public static function names(string $fqn): array
     {
@@ -78,7 +78,7 @@ final class UnitEnum
     /**
      * @template T of object
      * @param class-string<T>|null $attributeFQN
-     * @return ($attributeFQN is string ? array<T> : array<object>)
+     * @return ($attributeFQN is string ? list<T> : array<object>)
      */
     public static function getCaseAttributes(\UnitEnum $unitEnum, string|null $attributeFQN = null): array
     {

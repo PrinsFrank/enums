@@ -55,7 +55,7 @@ final class BackedEnum
      * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
-     * @return array<int, string>
+     * @return list<string>
      */
     public static function names(string $fqn): array
     {
@@ -70,7 +70,7 @@ final class BackedEnum
      * @template T of \BackedEnum
      * @param class-string<T> $fqn
      * @throws InvalidArgumentException
-     * @return array<int, int|string>
+     * @return list<int|string>
      */
     public static function values(string $fqn): array
     {
@@ -113,7 +113,7 @@ final class BackedEnum
     /**
      * @template T of object
      * @param class-string<T>|null $attributeFQN
-     * @return ($attributeFQN is string ? array<T> : array<object>)
+     * @return ($attributeFQN is string ? list<T> : array<object>)
      */
     public static function getCaseAttributes(\BackedEnum $backedEnum, string|null $attributeFQN = null): array
     {
